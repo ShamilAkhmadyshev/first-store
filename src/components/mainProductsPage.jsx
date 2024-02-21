@@ -1,16 +1,20 @@
 import React from "react";
 import ItemsList from "../components/itemsList";
-const MainProductsPage = ({ name, link = "" }) => {
+const MainProductsPage = ({ name, link = "", waiting, onChangeWaiting }) => {
   return (
     <>
       <header className="container-fluid">
-        <div className="">
-          <h1>Electronics</h1>
+        <div>
+          <h1>{name}</h1>
         </div>
       </header>
-      <ItemsList category="category/electronics" />
+      <ItemsList
+        onChangeWaiting={onChangeWaiting}
+        waiting={waiting}
+        category={link}
+      />
     </>
   );
 };
 
-export default ElectronicsPage;
+export default MainProductsPage;

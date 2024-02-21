@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import bootstrap from "bootstrap";
-const NavBar = () => {
+const NavBar = ({ onChangeWaiting }) => {
   const html = document.documentElement;
   const [colorTheme, setColorTheme] = useState(
     html.getAttribute("data-bs-theme")
   );
-
+  const setWaitingTrue = () => {
+    onChangeWaiting(true);
+  };
   const sun = <i className="bi bi-brightness-high-fill"></i>;
   const moon = <i className="bi bi-moon-fill"></i>;
 
@@ -24,7 +26,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">
+        <NavLink onClick={setWaitingTrue} className="navbar-brand" to="/">
           Fake Store
         </NavLink>
         <button
@@ -41,22 +43,35 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/men">
+              <NavLink onClick={setWaitingTrue} className="nav-link" to="/">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink onClick={setWaitingTrue} className="nav-link" to="/men">
                 Men's clothing
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/women">
+              <NavLink
+                onClick={setWaitingTrue}
+                className="nav-link"
+                to="/women"
+              >
                 Women's clothing
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/jewelry">
+              <NavLink
+                onClick={setWaitingTrue}
+                className="nav-link"
+                to="/jewelry"
+              >
                 Jewelry
               </NavLink>
             </li>
             {/* <li className="nav-item dropdown">
-              <NavLink
+              <NavLink onClick={setWaitingTrue} 
                 className="nav-link dropdown-toggle"
                 to="/"
                 role="button"
@@ -67,12 +82,12 @@ const NavBar = () => {
               </NavLink>
               <ul className="dropdown-menu">
                 <li>
-                  <NavLink to="/" className="dropdown-item">
+                  <NavLink onClick={setWaitingTrue}  to="/" className="dropdown-item">
                     Action
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="dropdown-item" to="/">
+                  <NavLink onClick={setWaitingTrue}  className="dropdown-item" to="/">
                     Another action
                   </NavLink>
                 </li>
@@ -80,14 +95,18 @@ const NavBar = () => {
                   <hr className="dropdown-divider"></hr>
                 </li>
                 <li>
-                  <NavLink className="dropdown-item" to="/">
+                  <NavLink onClick={setWaitingTrue}  className="dropdown-item" to="/">
                     Something else here
                   </NavLink>
                 </li>
               </ul>
             </li> */}
             <li className="nav-item">
-              <NavLink to="/electronics" className="nav-link">
+              <NavLink
+                onClick={setWaitingTrue}
+                to="/electronics"
+                className="nav-link"
+              >
                 Electronics
               </NavLink>
             </li>
@@ -105,7 +124,11 @@ const NavBar = () => {
             </button>
           </form> */}
 
-          <NavLink className="nav-link me-3 mb-2 mb-lg-0" to="/login">
+          <NavLink
+            onClick={setWaitingTrue}
+            className="nav-link me-3 mb-2 mb-lg-0"
+            to="/login"
+          >
             Sign In/Sign Up
           </NavLink>
           <div className="btn" onClick={changeColorTheme}>

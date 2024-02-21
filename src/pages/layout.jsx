@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/navBar";
 
-const Layout = () => {
+const Layout = ({ onChangeWaiting }) => {
   return (
     <>
-      <NavBar />
+      <NavBar onChangeWaiting={onChangeWaiting} />
       <Outlet />
     </>
   );
