@@ -21,6 +21,7 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
   const setSortByRateIncrease = () => {
     setSearchParams({ sortby: "rate_increase" });
   };
+
   const setSortByRateDecrease = () => {
     setSearchParams({ sortby: "rate_decrease" });
   };
