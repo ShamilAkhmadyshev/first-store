@@ -177,7 +177,7 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
             >
               {filteredItems.map((item) => (
                 <Link
-                  to={`/products/${item.id}`}
+                  to={`/first-store/products/${item.id}`}
                   key={item.id}
                   className="card m-3 p-3 d-flex justify-content-center align-items-stretch focus-ring active"
                   style={{ maxWidth: "540px", textDecoration: "none" }}
