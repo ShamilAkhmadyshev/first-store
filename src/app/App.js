@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path="/first-store"
             element={<Layout onChangeWaiting={changeWaitingStatus} />}
           >
             <Route
@@ -30,7 +30,7 @@ function App() {
               }
             />
             <Route
-              path="/men"
+              path="/first-store/men"
               element={
                 <MainProductsPage
                   waiting={waiting}
@@ -41,7 +41,7 @@ function App() {
               }
             />
             <Route
-              path="/women"
+              path="/first-store/women"
               element={
                 <MainProductsPage
                   waiting={waiting}
@@ -52,7 +52,7 @@ function App() {
               }
             />
             <Route
-              path="/jewelry"
+              path="/first-store/jewelry"
               element={
                 <MainProductsPage
                   waiting={waiting}
@@ -63,7 +63,7 @@ function App() {
               }
             />
             <Route
-              path="/electronics"
+              path="/first-store/electronics"
               element={
                 <MainProductsPage
                   waiting={waiting}
@@ -76,7 +76,7 @@ function App() {
             <Route
               waiting={waiting}
               onChangeWaiting={changeWaitingStatus}
-              path="/products/:id"
+              path="/first-store/products/:id"
               element={<ProductPage />}
             />
           </Route>
