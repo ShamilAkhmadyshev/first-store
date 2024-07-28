@@ -6,7 +6,6 @@ import Spinner from "./spinner";
 const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
   const [items, setItems] = useState(null);
   const [filteredItems, setFilteredItems] = useState();
-  const [originalList, setOriginalList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortByQuery = searchParams.get("sortby") || "Sort by";
@@ -34,37 +33,38 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
   useEffect(() => {
     switch (sortByQuery) {
       case "price_increase":
-        if (filteredItems) {
-          setFilteredItems(
-            [...filteredItems].sort((a, b) => a.price - b.price)
+        if (items) {
+          setFilteredItems((prevItems) =>
+            [...prevItems].sort((a, b) => a.price - b.price)
           );
         }
         break;
       case "price_decrease":
-        if (filteredItems) {
-          setFilteredItems(
-            [...filteredItems].sort((a, b) => b.price - a.price)
+        if (items) {
+          setFilteredItems((prevItems) =>
+            [...prevItems].sort((a, b) => b.price - a.price)
           );
         }
         break;
       case "rate_increase":
-        if (filteredItems) {
-          setFilteredItems(
-            [...filteredItems].sort((a, b) => a.rating.rate - b.rating.rate)
+        if (items) {
+          setFilteredItems((prevItems) =>
+            [...prevItems].sort((a, b) => a.rating.rate - b.rating.rate)
           );
         }
         break;
       case "rate_decrease":
-        if (filteredItems) {
-          setFilteredItems(
-            [...filteredItems].sort((a, b) => b.rating.rate - a.rating.rate)
+        if (items) {
+          setFilteredItems((prevItems) =>
+            [...prevItems].sort((a, b) => b.rating.rate - a.rating.rate)
           );
         }
         break;
       default:
-        setFilteredItems(originalList);
+        setFilteredItems(items);
+        break;
     }
-  }, [sortByQuery, filteredItems, originalList]);
+  }, [sortByQuery, items]);
 
   useEffect(() => {
     axios
@@ -72,7 +72,6 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
       .then((response) => {
         setItems(response.data);
         setFilteredItems(response.data);
-        setOriginalList(response.data);
       })
       .then(() => {
         onChangeWaiting(false);
@@ -84,12 +83,11 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
   }, [category, onChangeWaiting]);
 
   const searchProduct = (e) => {
-    console.log(e.target.value);
-    setFilteredItems(
-      items.filter((item) =>
-        item.title.toLowerCase().includes(e.target.value.toLowerCase())
-      )
-    );
+    const test = items.filter((item) => {
+      return item.title.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+
+    setFilteredItems(test);
   };
 
   return (
@@ -199,32 +197,6 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
                           {item.title}
                         </h5>
 
-                        {/* <button
-                          onClick={(e) => e.preventDefault()}
-                          className="accordion d-flex justify-content-between"
-                          data-bs-toggle="collapse"
-                          href={`#multiCollapseExample${filteredItems.indexOf(
-                            item
-                          )}`}
-                          aria-expanded="true"
-                          aria-controls={`multiCollapseExample${filteredItems.indexOf(
-                            item
-                          )}`}
-                        >
-                          <span>Description</span>
-                          <i className="bi bi-chevron-down"></i>
-                        </button>
-                        <div
-                          className="multi-collapse collapse"
-                          id={`multiCollapseExample${filteredItems.indexOf(
-                            item
-                          )}`}
-                        >
-                          <div className="card card-body">
-                            {item.description}
-                          </div>
-                        </div> */}
-
                         <div
                           style={{ marginTop: "10px" }}
                           className="d-flex justify-content-between"
@@ -255,7 +227,7 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
             </div>
           ) : (
             <div className="alert alert-dark " role="alert">
-              Nothing's founded
+              Nothing was found
             </div>
           )}
         </div>
