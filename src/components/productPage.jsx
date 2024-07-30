@@ -14,27 +14,12 @@ const ProductPage = () => {
       .then((res) => setProduct(res.data));
   }, [id]);
 
+  // useEffect(() => {
+  //   console.log(product, "test");
+  // }, [product]);
+
   // const category = product.category === "jewelery" ? "jewelry" :  product.category.includes(" ") ? `${product.category.splice}`
 
-  //------------------------------------
-
-  const majorityElement = function (nums) {
-    for (let i = 0; i < nums.length; i++) {
-      const halfLength = nums.length / 2;
-      let count = [];
-      for (let a = 0; a < nums.length; a++) {
-        if (nums[i] === nums[a]) {
-          count.push(nums[a]);
-        }
-      }
-      if (count.length > halfLength) {
-        return count[0];
-      }
-    }
-  };
-
-  console.log(majorityElement([3, 2, 3]));
-  //---------------------------------------------------------
   return (
     <>
       {!product ? (
@@ -44,10 +29,18 @@ const ProductPage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb p-3">
               <li className="breadcrumb-item">
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/first-store">Home</NavLink>
               </li>
               <li className="breadcrumb-item">
-                <NavLink to={`/products/${product.category}`}>
+                <NavLink
+                  to={`/first-store/${
+                    product.category === "men's clothing"
+                      ? "men"
+                      : product.category === "women's clothing"
+                      ? "women"
+                      : product.category
+                  }`}
+                >
                   {Humanize.capitalize(product.category)}
                 </NavLink>
               </li>
@@ -98,7 +91,7 @@ const ProductPage = () => {
                           {product.price}$
                         </span>
                       </h3>
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" className="btn btn-primary">
                         Add to cart
                       </button>
                     </div>

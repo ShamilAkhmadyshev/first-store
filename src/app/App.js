@@ -4,6 +4,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../pages/layout";
 import MainProductsPage from "../components/mainProductsPage";
 import ProductPage from "../components/productPage";
+import { ToastContainer } from "react-toastify";
+import LoginForm from "./ui/loginForm";
+import RegisterForm from "./ui/registerForm";
 
 function App() {
   const [waiting, setWaiting] = useState(true);
@@ -76,12 +79,25 @@ function App() {
             <Route
               waiting={waiting}
               onChangeWaiting={changeWaitingStatus}
-              path="/first-store/products/:id"
+              path="/first-store/:category/:id"
               element={<ProductPage />}
+            />
+            <Route
+              // waiting={waiting}
+              // onChangeWaiting={changeWaitingStatus}
+              path="/first-store/login"
+              element={<LoginForm />}
+            />
+            <Route
+              // waiting={waiting}
+              // onChangeWaiting={changeWaitingStatus}
+              path="/first-store/registration"
+              element={<RegisterForm />}
             />
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </>
   );
 }

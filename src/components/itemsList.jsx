@@ -83,11 +83,11 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
   }, [category, onChangeWaiting]);
 
   const searchProduct = (e) => {
-    const test = items.filter((item) => {
+    const searchIndex = items.filter((item) => {
       return item.title.toLowerCase().includes(e.target.value.toLowerCase());
     });
 
-    setFilteredItems(test);
+    setFilteredItems(searchIndex);
   };
 
   return (
@@ -175,7 +175,13 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
             >
               {filteredItems.map((item) => (
                 <Link
-                  to={`/first-store/products/${item.id}`}
+                  to={`/first-store/${
+                    item.category === "men's clothing"
+                      ? "men"
+                      : item.category === "women's clothing"
+                      ? "women"
+                      : item.category
+                  }/${item.id}`}
                   key={item.id}
                   className="card m-3 p-3 d-flex justify-content-center align-items-stretch focus-ring active"
                   style={{ maxWidth: "540px", textDecoration: "none" }}
