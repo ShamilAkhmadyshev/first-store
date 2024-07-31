@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { validator } from "../utils/validator";
 import TextField from "../../components/form/textField";
 import CheckBoxField from "../../components/form/checkBoxField";
+import { useAuth } from "../hooks/useAuth";
 
 const RegisterForm = () => {
+  const { signUp } = useAuth();
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
@@ -61,7 +63,7 @@ const RegisterForm = () => {
     validate();
     const isValid = validate();
     if (!isValid) return;
-    console.log(data);
+    signUp(data);
     navigate("/first-store");
   };
 
