@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
-import bootstrap from "bootstrap";
+import { useAuth } from "../app/hooks/useAuth";
+import NavProfile from "../app/ui/navProfile";
+// import bootstrap from "bootstrap";
 const NavBar = ({ onChangeWaiting }) => {
+  const { user } = useAuth();
   const html = document.documentElement;
   const [colorTheme, setColorTheme] = useState(
     html.getAttribute("data-bs-theme")
@@ -26,11 +29,7 @@ const NavBar = ({ onChangeWaiting }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <NavLink
-          onClick={setWaitingTrue}
-          className="navbar-brand"
-          to="/first-store"
-        >
+        <NavLink onClick={setWaitingTrue} className="navbar-brand" to="/">
           Fake Store
         </NavLink>
         <button
@@ -50,17 +49,13 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/first-store"
+                to=""
               >
                 Home
               </NavLink>
             </li> */}
             <li className="nav-item">
-              <NavLink
-                onClick={setWaitingTrue}
-                className="nav-link"
-                to="/first-store/men"
-              >
+              <NavLink onClick={setWaitingTrue} className="nav-link" to="/men">
                 Men's clothing
               </NavLink>
             </li>
@@ -68,7 +63,7 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/first-store/women"
+                to="/women"
               >
                 Women's clothing
               </NavLink>
@@ -77,7 +72,7 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/first-store/jewelry"
+                to="/jewelry"
               >
                 Jewelry
               </NavLink>
@@ -116,7 +111,7 @@ const NavBar = ({ onChangeWaiting }) => {
             <li className="nav-item">
               <NavLink
                 onClick={setWaitingTrue}
-                to="/first-store/electronics"
+                to="/electronics"
                 className="nav-link"
               >
                 Electronics
@@ -135,14 +130,26 @@ const NavBar = ({ onChangeWaiting }) => {
               Search
             </button>
           </form> */}
-
-          <NavLink
-            onClick={setWaitingTrue}
-            className="nav-link me-3 mb-2 mb-lg-0"
-            to="/first-store/login"
-          >
-            Sign In/Sign Up
-          </NavLink>
+          {user ? (
+            <>
+              <NavLink
+                className="nav-link me-3 mb-2 mb-lg-0"
+                onClick={setWaitingTrue}
+                to="/cart"
+              >
+                Cart
+              </NavLink>
+              <NavProfile />
+            </>
+          ) : (
+            <NavLink
+              onClick={setWaitingTrue}
+              className="nav-link me-3 mb-2 mb-lg-0"
+              to="/login"
+            >
+              Sign In/Sign Up
+            </NavLink>
+          )}
           <div className="btn" onClick={changeColorTheme}>
             {colorTheme === "light" ? moon : sun}
           </div>

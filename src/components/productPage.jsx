@@ -29,11 +29,11 @@ const ProductPage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb p-3">
               <li className="breadcrumb-item">
-                <NavLink to="/first-store">Home</NavLink>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li className="breadcrumb-item">
                 <NavLink
-                  to={`/first-store/${
+                  to={`/${
                     product.category === "men's clothing"
                       ? "men"
                       : product.category === "women's clothing"

@@ -21,7 +21,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route
-              path="/first-store"
+              path="/"
               element={<Layout onChangeWaiting={changeWaitingStatus} />}
             >
               <Route
@@ -35,7 +35,7 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/men"
+                path="/men"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -46,7 +46,7 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/women"
+                path="/women"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -57,7 +57,7 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/jewelry"
+                path="/jewelry"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -68,7 +68,7 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/electronics"
+                path="/electronics"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -81,19 +81,19 @@ function App() {
               <Route
                 waiting={waiting}
                 onChangeWaiting={changeWaitingStatus}
-                path="/first-store/:category/:id"
+                path="/:category/:id"
                 element={<ProductPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/first-store/login"
+                path="/login"
                 element={<LoginPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/first-store/registration"
+                path="/registration"
                 element={<RegistrationPage />}
               />
             </Route>
