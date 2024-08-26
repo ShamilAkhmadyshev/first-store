@@ -36,7 +36,6 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (res) => {
-    console.log(res);
     return res;
   },
   function (error) {
@@ -56,6 +55,7 @@ const httpService = {
   put: http.put,
   delete: http.delete,
   post: http.post,
+  patch: http.patch,
 };
 
 export default httpService;

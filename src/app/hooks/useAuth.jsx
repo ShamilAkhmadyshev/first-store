@@ -14,6 +14,10 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   async function logIn({ email, password }) {
     const url = `accounts:signInWithPassword`;
     try {
@@ -58,12 +62,14 @@ const AuthProvider = ({ children }) => {
       });
       setTokens(data);
       createUser({ _id: data.localId, email, password });
+      // const content = await userService.getCurrentUser();
+      // setUser({ _id: data.localId, email, password, cart: ["test"] });
     } catch (error) {
       const { code, message } = error.response.data.error;
       if (code === 400) {
         if (message === "EMAIL_EXISTS") {
           const errorObject = {
-            email: "Пользователь с таким адресом уже существует",
+            email: "User with that email already exists",
           };
           throw errorObject;
         }
@@ -73,7 +79,7 @@ const AuthProvider = ({ children }) => {
 
   const createUser = async (data) => {
     try {
-      const { content } = await userService.create(data);
+      const content = await userService.create(data);
       console.log(content);
       setUser(content);
     } catch (error) {
@@ -102,6 +108,16 @@ const AuthProvider = ({ children }) => {
     setUser(null);
   }
 
+  async function updateUser(data) {
+    try {
+      const content = await userService.update(data);
+      console.log("upd user", content);
+      setUser(content);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (localStorage.getItem("jwt-token")) {
       getUserData();
@@ -109,7 +125,9 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signUp, logIn, createUser, user, logout }}>
+    <AuthContext.Provider
+      value={{ signUp, updateUser, logIn, createUser, user, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

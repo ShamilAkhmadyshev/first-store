@@ -14,6 +14,13 @@ const userService = {
     console.log(data);
     return data;
   },
+  update: async (payload) => {
+    const { data } = await httpService.patch(
+      userEndpoint + payload._id,
+      payload
+    );
+    return data;
+  },
 };
 
 export default userService;

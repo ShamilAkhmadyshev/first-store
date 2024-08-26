@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import LoginPage from "../pages/login";
 import RegistrationPage from "../pages/registration";
 import AuthProvider from "./hooks/useAuth";
+import Cart from "../components/cart";
 
 function App() {
   const [waiting, setWaiting] = useState(true);
@@ -95,6 +96,12 @@ function App() {
                 // onChangeWaiting={changeWaitingStatus}
                 path="/registration"
                 element={<RegistrationPage />}
+              />
+              <Route
+                // waiting={waiting}
+                // onChangeWaiting={changeWaitingStatus}
+                path="/cart"
+                element={<Cart />}
               />
             </Route>
           </Routes>

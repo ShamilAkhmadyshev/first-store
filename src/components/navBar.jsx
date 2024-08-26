@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../app/hooks/useAuth";
 import NavProfile from "../app/ui/navProfile";
 // import bootstrap from "bootstrap";
 const NavBar = ({ onChangeWaiting }) => {
   const { user } = useAuth();
+  const [productQuantity, setProductQuantity] = useState();
   const html = document.documentElement;
   const [colorTheme, setColorTheme] = useState(
     html.getAttribute("data-bs-theme")
@@ -14,6 +15,15 @@ const NavBar = ({ onChangeWaiting }) => {
   };
   const sun = <i className="bi bi-brightness-high-fill"></i>;
   const moon = <i className="bi bi-moon-fill"></i>;
+
+  useEffect(() => {
+    // setProductQuantity()
+    if (user && user.cart) {
+      let quan = 0;
+      user.cart.forEach((p) => (quan += p.quantity));
+      setProductQuantity(quan);
+    }
+  }, [user]);
 
   const changeColorTheme = () => {
     ("data-bs-theme");
@@ -137,7 +147,13 @@ const NavBar = ({ onChangeWaiting }) => {
                 onClick={setWaitingTrue}
                 to="/cart"
               >
-                Cart
+                {productQuantity ? (
+                  <>
+                    <i className="bi bi-cart-fill"></i> {productQuantity}
+                  </>
+                ) : (
+                  <i className="bi bi-cart"></i>
+                )}
               </NavLink>
               <NavProfile />
             </>

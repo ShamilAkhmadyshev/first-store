@@ -1,12 +1,42 @@
-import { NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "./spinner";
 import Humanize from "humanize-plus";
-import bootstrap from "bootstrap";
+// import bootstrap from "bootstrap";
+// import userService from "../app/service/userService";
+import { useAuth } from "../app/hooks/useAuth";
 const ProductPage = () => {
   const [product, setProduct] = useState();
+  const [cartAdded, setCartAdded] = useState(false);
   const { id } = useParams();
+  const { user, updateUser } = useAuth();
+
+  useEffect(() => {
+    if (!cartAdded) {
+      user?.cart?.forEach((p) =>
+        Number(p?.id) === Number(id) ? setCartAdded(true) : null
+      );
+    }
+    console.log(cartAdded);
+  }, [user]);
+
+  const handleAddProduct = async () => {
+    const data = user.cart
+      ? {
+          ...user,
+          cart: [...user.cart, { id: product.id, quantity: 1 }],
+        }
+      : {
+          ...user,
+          cart: [{ id: product.id, quantity: 1 }],
+        };
+    try {
+      await updateUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -91,9 +121,19 @@ const ProductPage = () => {
                           {product.price}$
                         </span>
                       </h3>
-                      <button type="button" className="btn btn-primary">
-                        Add to cart
-                      </button>
+                      {cartAdded ? (
+                        <Link className="btn btn-primary" to={"/cart"}>
+                          Go to cart
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={handleAddProduct}
+                          type="button"
+                          className="btn btn-primary"
+                        >
+                          Add to cart
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
