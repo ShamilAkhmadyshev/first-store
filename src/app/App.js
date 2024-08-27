@@ -22,7 +22,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route
-              path="/"
+              path="/store"
               element={<Layout onChangeWaiting={changeWaitingStatus} />}
             >
               <Route
@@ -36,7 +36,7 @@ function App() {
                 }
               />
               <Route
-                path="/men"
+                path="/store/men"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -47,7 +47,7 @@ function App() {
                 }
               />
               <Route
-                path="/women"
+                path="/store/women"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -58,7 +58,7 @@ function App() {
                 }
               />
               <Route
-                path="/jewelry"
+                path="/store/jewelry"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -69,7 +69,7 @@ function App() {
                 }
               />
               <Route
-                path="/electronics"
+                path="/store/electronics"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -82,25 +82,25 @@ function App() {
               <Route
                 waiting={waiting}
                 onChangeWaiting={changeWaitingStatus}
-                path="/:category/:id"
+                path="/store/:category/:id"
                 element={<ProductPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/login"
+                path="/store/login"
                 element={<LoginPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/registration"
+                path="/store/registration"
                 element={<RegistrationPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/cart"
+                path="/store/cart"
                 element={<Cart />}
               />
             </Route>

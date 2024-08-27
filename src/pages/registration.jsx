@@ -10,7 +10,8 @@ const RegistrationPage = () => {
             <h3 className="mb-4">Register</h3>
             <RegisterForm />
             <p>
-              Already have account? <NavLink to={"/login"}> Sign In</NavLink>
+              Already have account?{" "}
+              <NavLink to={"/store/login"}> Sign In</NavLink>
             </p>
           </>
         </div>
