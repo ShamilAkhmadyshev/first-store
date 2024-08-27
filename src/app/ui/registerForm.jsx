@@ -23,7 +23,7 @@ const RegisterForm = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/store");
+      navigate("/first-store");
     }
   }, [user, navigate]);
 
@@ -71,7 +71,7 @@ const RegisterForm = () => {
     if (!isValid) return;
     try {
       await signUp(data);
-      navigate("/store");
+      navigate("/first-store");
     } catch (error) {
       setErrors(error);
     }

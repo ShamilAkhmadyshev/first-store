@@ -175,7 +175,7 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
             >
               {filteredItems.map((item) => (
                 <Link
-                  to={`/store/${
+                  to={`/first-store/${
                     item.category === "men's clothing"
                       ? "men"
                       : item.category === "women's clothing"

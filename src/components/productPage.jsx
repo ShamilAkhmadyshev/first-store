@@ -59,11 +59,11 @@ const ProductPage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb p-3">
               <li className="breadcrumb-item">
-                <NavLink to="/store/">Home</NavLink>
+                <NavLink to="/first-store">Home</NavLink>
               </li>
               <li className="breadcrumb-item">
                 <NavLink
-                  to={`/store/${
+                  to={`/first-store/${
                     product.category === "men's clothing"
                       ? "men"
                       : product.category === "women's clothing"
@@ -124,7 +124,10 @@ const ProductPage = () => {
                         </span>
                       </h3>
                       {cartAdded ? (
-                        <Link className="btn btn-primary" to={"/store/cart"}>
+                        <Link
+                          className="btn btn-primary"
+                          to={"/first-store/cart"}
+                        >
                           Go to cart
                         </Link>
                       ) : (

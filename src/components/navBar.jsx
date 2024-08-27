@@ -39,7 +39,11 @@ const NavBar = ({ onChangeWaiting }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <NavLink onClick={setWaitingTrue} className="navbar-brand" to="/store">
+        <NavLink
+          onClick={setWaitingTrue}
+          className="navbar-brand"
+          to="/first-store"
+        >
           Fake Store
         </NavLink>
         <button
@@ -68,7 +72,7 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/store/men"
+                to="/first-store/men"
               >
                 Men's clothing
               </NavLink>
@@ -77,7 +81,7 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/store/women"
+                to="/first-store/women"
               >
                 Women's clothing
               </NavLink>
@@ -86,7 +90,7 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/store/jewelry"
+                to="/first-store/jewelry"
               >
                 Jewelry
               </NavLink>
@@ -125,7 +129,7 @@ const NavBar = ({ onChangeWaiting }) => {
             <li className="nav-item">
               <NavLink
                 onClick={setWaitingTrue}
-                to="/store/electronics"
+                to="/first-store/electronics"
                 className="nav-link"
               >
                 Electronics
@@ -149,7 +153,7 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 className="nav-link me-3 mb-2 mb-lg-0"
                 onClick={setWaitingTrue}
-                to="/store/cart"
+                to="/first-store/cart"
               >
                 {productQuantity ? (
                   <>
@@ -165,7 +169,7 @@ const NavBar = ({ onChangeWaiting }) => {
             <NavLink
               onClick={setWaitingTrue}
               className="nav-link me-3 mb-2 mb-lg-0"
-              to="/store/login"
+              to="/first-store/login"
             >
               Sign In/Sign Up
             </NavLink>

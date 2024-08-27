@@ -12,7 +12,7 @@ const LoginPage = () => {
             <LoginForm />
             <p>
               Dont have account?
-              <NavLink to={"/store/registration"}> Sign Up</NavLink>
+              <NavLink to={"/first-store/registration"}> Sign Up</NavLink>
             </p>
           </>
         </div>

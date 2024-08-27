@@ -18,7 +18,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/store");
+      navigate("/first-store");
     }
   }, []);
 
@@ -53,7 +53,7 @@ const LoginForm = () => {
     if (!isValid) return;
     try {
       await logIn(data);
-      navigate("/store");
+      navigate("/first-store");
     } catch (error) {
       setErrors(error);
     }

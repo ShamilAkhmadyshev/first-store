@@ -11,7 +11,7 @@ const RegistrationPage = () => {
             <RegisterForm />
             <p>
               Already have account?{" "}
-              <NavLink to={"/store/login"}> Sign In</NavLink>
+              <NavLink to={"/first-store/login"}> Sign In</NavLink>
             </p>
           </>
         </div>

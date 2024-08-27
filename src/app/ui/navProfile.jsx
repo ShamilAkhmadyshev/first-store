@@ -11,7 +11,7 @@ const NavProfile = () => {
   };
   const logOutUser = () => {
     logout();
-    navigate("/");
+    navigate("/first-store");
   };
   return (
     <>
