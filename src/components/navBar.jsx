@@ -129,7 +129,7 @@ const NavBar = ({ onChangeWaiting }) => {
               className="nav-link me-3 mb-2 mb-lg-0"
               to="/first-store/login"
             >
-              Sign In/Sign Up
+              Log in/Sign up
             </NavLink>
           )}
           <div className="btn" onClick={changeColorTheme}>

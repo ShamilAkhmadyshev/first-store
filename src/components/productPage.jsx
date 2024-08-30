@@ -127,7 +127,7 @@ const ProductPage = () => {
                         >
                           Go to cart
                         </Link>
-                      ) : (
+                      ) : user ? (
                         <button
                           onClick={handleAddProduct}
                           type="button"
@@ -135,6 +135,13 @@ const ProductPage = () => {
                         >
                           Add to cart
                         </button>
+                      ) : (
+                        <Link
+                          className="btn btn-primary"
+                          to="/first-store/login"
+                        >
+                          Log in to add to cart
+                        </Link>
                       )}
                     </div>
                   </div>
