@@ -14,8 +14,14 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
 
+  const [productQuantity, setProductQuantity] = useState();
+
   useEffect(() => {
-    console.log(user);
+    if (user && user.cart) {
+      let quan = 0;
+      user.cart.forEach((p) => (quan += p.quantity));
+      setProductQuantity(quan);
+    }
   }, [user]);
 
   async function logIn({ email, password }) {
@@ -111,8 +117,10 @@ const AuthProvider = ({ children }) => {
   async function updateUser(data) {
     try {
       const content = await userService.update(data);
-      console.log("upd user", content);
       setUser(content);
+      let quan = 0;
+      content.cart?.forEach((p) => (quan += p.quantity));
+      setProductQuantity(quan);
     } catch (error) {
       console.log(error);
     }
@@ -126,7 +134,15 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signUp, updateUser, logIn, createUser, user, logout }}
+      value={{
+        signUp,
+        updateUser,
+        logIn,
+        createUser,
+        user,
+        logout,
+        productQuantity,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -4,8 +4,8 @@ import { useAuth } from "../app/hooks/useAuth";
 import NavProfile from "../app/ui/navProfile";
 // import bootstrap from "bootstrap";
 const NavBar = ({ onChangeWaiting }) => {
-  const { user } = useAuth();
-  const [productQuantity, setProductQuantity] = useState();
+  const { user, productQuantity } = useAuth();
+  // const [productQuantity, setProductQuantity] = useState();
   const html = document.documentElement;
   const [colorTheme, setColorTheme] = useState(
     html.getAttribute("data-bs-theme")
@@ -16,14 +16,13 @@ const NavBar = ({ onChangeWaiting }) => {
   const sun = <i className="bi bi-brightness-high-fill"></i>;
   const moon = <i className="bi bi-moon-fill"></i>;
 
-  useEffect(() => {
-    // setProductQuantity()
-    if (user && user.cart) {
-      let quan = 0;
-      user.cart.forEach((p) => (quan += p.quantity));
-      setProductQuantity(quan);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user && user.cart) {
+  //     let quan = 0;
+  //     user.cart.forEach((p) => (quan += p.quantity));
+  //     setProductQuantity(quan);
+  //   }
+  // }, [user]);
 
   const changeColorTheme = () => {
     ("data-bs-theme");
@@ -72,82 +71,41 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/first-store/men"
+                to="/first-store/tv"
               >
-                Men's clothing
+                TV
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/first-store/women"
+                to="/first-store/audio"
               >
-                Women's clothing
+                Audio
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                onClick={setWaitingTrue}
+                to="/first-store/mobile"
+                className="nav-link"
+              >
+                Mobile
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
                 onClick={setWaitingTrue}
-                className="nav-link"
-                to="/first-store/jewelry"
-              >
-                Jewelry
-              </NavLink>
-            </li>
-            {/* <li className="nav-item dropdown">
-              <NavLink onClick={setWaitingTrue} 
-                className="nav-link dropdown-toggle"
-                to="/"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </NavLink>
-              <ul className="dropdown-menu">
-                <li>
-                  <NavLink onClick={setWaitingTrue}  to="/" className="dropdown-item">
-                    Action
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink onClick={setWaitingTrue}  className="dropdown-item" to="/">
-                    Another action
-                  </NavLink>
-                </li>
-                <li>
-                  <hr className="dropdown-divider"></hr>
-                </li>
-                <li>
-                  <NavLink onClick={setWaitingTrue}  className="dropdown-item" to="/">
-                    Something else here
-                  </NavLink>
-                </li>
-              </ul>
-            </li> */}
-            <li className="nav-item">
-              <NavLink
-                onClick={setWaitingTrue}
-                to="/first-store/electronics"
+                to="/first-store/gaming"
                 className="nav-link"
               >
-                Electronics
+                Gaming
               </NavLink>
             </li>
           </ul>
 
-          {/* <form className="d-flex me-4" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            ></input>
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form> */}
           {user ? (
             <>
               <NavLink
