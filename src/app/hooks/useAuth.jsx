@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import userService from "../service/userService";
-import { setTokens } from "../service/localStorageService";
+import localStorageService, { setTokens } from "../service/localStorageService";
 
 const httpAuth = axios.create({
   baseURL: "https://identitytoolkit.googleapis.com/v1/",
@@ -12,7 +12,17 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
+
+  const [productQuantity, setProductQuantity] = useState();
+
+  useEffect(() => {
+    if (user && user.cart) {
+      let quan = 0;
+      user.cart.forEach((p) => (quan += p.quantity));
+      setProductQuantity(quan);
+    }
+  }, [user]);
 
   async function logIn({ email, password }) {
     const url = `accounts:signInWithPassword`;
@@ -23,6 +33,7 @@ const AuthProvider = ({ children }) => {
         returnSecureToken: true,
       });
       setTokens(data);
+      await getUserData();
     } catch (error) {
       const { code, message } = error.response.data.error;
       console.log(code, message);
@@ -57,22 +68,82 @@ const AuthProvider = ({ children }) => {
       });
       setTokens(data);
       createUser({ _id: data.localId, email, password });
+      // const content = await userService.getCurrentUser();
+      // setUser({ _id: data.localId, email, password, cart: ["test"] });
     } catch (error) {
-      console.log(error);
+      const { code, message } = error.response.data.error;
+      if (code === 400) {
+        if (message === "EMAIL_EXISTS") {
+          const errorObject = {
+            email: "User with that email already exists",
+          };
+          throw errorObject;
+        }
+      }
     }
   }
 
   const createUser = async (data) => {
     try {
-      const { content } = userService.create(data);
+      const content = await userService.create(data);
+      console.log(content);
       setUser(content);
     } catch (error) {
-      Promise.reject(error);
+      console.error(error);
     }
   };
 
+  // useEffect(() => {
+  //   console.log(user);
+  // }, []);
+
+  async function getUserData() {
+    try {
+      if (localStorage.getItem("jwt-token")) {
+        // const { content } = await userService.getCurrentUser();
+        const content = await userService.getCurrentUser();
+        setUser(content);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function logout() {
+    localStorageService.removeAuthData();
+    setUser(null);
+  }
+
+  async function updateUser(data) {
+    try {
+      const content = await userService.update(data);
+      setUser(content);
+      let quan = 0;
+      content.cart?.forEach((p) => (quan += p.quantity));
+      setProductQuantity(quan);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("jwt-token")) {
+      getUserData();
+    }
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ signUp, logIn, createUser, user }}>
+    <AuthContext.Provider
+      value={{
+        signUp,
+        updateUser,
+        logIn,
+        createUser,
+        user,
+        logout,
+        productQuantity,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

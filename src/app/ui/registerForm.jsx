@@ -6,7 +6,7 @@ import CheckBoxField from "../../components/form/checkBoxField";
 import { useAuth } from "../hooks/useAuth";
 
 const RegisterForm = () => {
-  const { signUp } = useAuth();
+  const { signUp, user } = useAuth();
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
@@ -20,6 +20,12 @@ const RegisterForm = () => {
       [target.name]: target.value,
     }));
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/first-store");
+    }
+  }, [user, navigate]);
 
   const validatorConfig = {
     email: {
@@ -58,13 +64,17 @@ const RegisterForm = () => {
     validate();
   }, [data]);
   const isValid = Object.keys(errors).length === 0;
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     validate();
     const isValid = validate();
     if (!isValid) return;
-    signUp(data);
-    navigate("/first-store");
+    try {
+      await signUp(data);
+      navigate("/first-store");
+    } catch (error) {
+      setErrors(error);
+    }
   };
 
   return (

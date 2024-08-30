@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "bootstrap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../pages/layout";
 import MainProductsPage from "../components/mainProductsPage";
@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import LoginPage from "../pages/login";
 import RegistrationPage from "../pages/registration";
 import AuthProvider from "./hooks/useAuth";
+import Cart from "../components/cart";
 
 function App() {
   const [waiting, setWaiting] = useState(true);
@@ -35,49 +36,71 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/men"
+                path="/first-store/tv"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="Men's clothing"
-                    link="category/men's%20clothing"
+                    name="TV"
+                    link="tv"
                   />
                 }
               />
               <Route
-                path="/first-store/women"
+                path="/first-store/audio"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="Women's clothing"
-                    link="category/women's%20clothing"
+                    name="Audio"
+                    link="audio"
+                  />
+                }
+              />
+              {/* <Route
+                path="/first-store/laptop"
+                element={
+                  <MainProductsPage
+                    waiting={waiting}
+                    onChangeWaiting={changeWaitingStatus}
+                    name="Laptop"
+                    link="laptop"
+                  />
+                }
+              /> */}
+              <Route
+                path="/first-store/mobile"
+                element={
+                  <MainProductsPage
+                    waiting={waiting}
+                    onChangeWaiting={changeWaitingStatus}
+                    name="Mobile"
+                    link="mobile"
                   />
                 }
               />
               <Route
-                path="/first-store/jewelry"
+                path="/first-store/gaming"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="Jewelry"
-                    link="category/jewelery"
+                    name="Gaming"
+                    link="gaming"
                   />
                 }
               />
-              <Route
-                path="/first-store/electronics"
+              {/* <Route
+                path="/first-store/appliances"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="Electronics"
-                    link="category/electronics"
+                    name="Appliances"
+                    link="appliances"
                   />
                 }
-              />
+              /> */}
               <Route
                 waiting={waiting}
                 onChangeWaiting={changeWaitingStatus}
@@ -95,6 +118,12 @@ function App() {
                 // onChangeWaiting={changeWaitingStatus}
                 path="/first-store/registration"
                 element={<RegistrationPage />}
+              />
+              <Route
+                // waiting={waiting}
+                // onChangeWaiting={changeWaitingStatus}
+                path="/first-store/cart"
+                element={<Cart />}
               />
             </Route>
           </Routes>

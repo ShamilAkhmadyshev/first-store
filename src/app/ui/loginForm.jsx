@@ -10,11 +10,17 @@ const LoginForm = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const { logIn } = useAuth();
+  const { logIn, user } = useAuth();
   const [errors, setErrors] = useState({});
   const handleChange = (target) => {
     setData((prev) => ({ ...prev, [target.name]: target.value }));
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/first-store");
+    }
+  }, []);
 
   const validatorConfig = {
     email: {

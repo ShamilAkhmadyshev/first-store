@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
 import Spinner from "./spinner";
 
-const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
+const ItemsList = ({ category, waiting, onChangeWaiting }) => {
   const [items, setItems] = useState(null);
   const [filteredItems, setFilteredItems] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,13 +17,13 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
   const setSortByPriceDecrease = () => {
     setSearchParams({ sortby: "price_decrease" });
   };
-  const setSortByRateIncrease = () => {
-    setSearchParams({ sortby: "rate_increase" });
-  };
+  // const setSortByRateIncrease = () => {
+  //   setSearchParams({ sortby: "rate_increase" });
+  // };
 
-  const setSortByRateDecrease = () => {
-    setSearchParams({ sortby: "rate_decrease" });
-  };
+  // const setSortByRateDecrease = () => {
+  //   setSearchParams({ sortby: "rate_decrease" });
+  // };
 
   const setSortByDefault = () => {
     searchParams.delete("sortby");
@@ -46,20 +46,20 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
           );
         }
         break;
-      case "rate_increase":
-        if (items) {
-          setFilteredItems((prevItems) =>
-            [...prevItems].sort((a, b) => a.rating.rate - b.rating.rate)
-          );
-        }
-        break;
-      case "rate_decrease":
-        if (items) {
-          setFilteredItems((prevItems) =>
-            [...prevItems].sort((a, b) => b.rating.rate - a.rating.rate)
-          );
-        }
-        break;
+      // case "rate_increase":
+      //   if (items) {
+      //     setFilteredItems((prevItems) =>
+      //       [...prevItems].sort((a, b) => a.rating.rate - b.rating.rate)
+      //     );
+      //   }
+      //   break;
+      // case "rate_decrease":
+      //   if (items) {
+      //     setFilteredItems((prevItems) =>
+      //       [...prevItems].sort((a, b) => b.rating.rate - a.rating.rate)
+      //     );
+      //   }
+      //   break;
       default:
         setFilteredItems(items);
         break;
@@ -68,10 +68,18 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
 
   useEffect(() => {
     axios
-      .get(`https://fakestoreapi.com/products/${category}`)
+      .get(`https://fakestoreapi.in/api/products`)
       .then((response) => {
-        setItems(response.data);
-        setFilteredItems(response.data);
+        if (category) {
+          const filtered = response.data.products.filter(
+            (p) => p.category === category
+          );
+          setItems(filtered);
+          setFilteredItems(filtered);
+        } else {
+          setFilteredItems(response.data.products);
+          setItems(response.data.products);
+        }
       })
       .then(() => {
         onChangeWaiting(false);
@@ -88,6 +96,14 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
     });
 
     setFilteredItems(searchIndex);
+  };
+
+  // useEffect(() => {
+  //   console.log(filteredItems);
+  // }, [filteredItems]);
+
+  const randomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
   return (
@@ -117,10 +133,6 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
                   ? "Price increase"
                   : sortByQuery === "price_decrease"
                   ? "Price decrease"
-                  : sortByQuery === "rate_increase"
-                  ? "Rate increase"
-                  : sortByQuery === "rate_decrease"
-                  ? "Rate decrease"
                   : "Sort by"}
               </button>
               <ul className="dropdown-menu">
@@ -138,22 +150,6 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
                     onClick={setSortByPriceDecrease}
                   >
                     Decrease price
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={setSortByRateIncrease}
-                  >
-                    Increase rate
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={setSortByRateDecrease}
-                  >
-                    Decrease rate
                   </button>
                 </li>
                 <li>
@@ -175,13 +171,7 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
             >
               {filteredItems.map((item) => (
                 <Link
-                  to={`/first-store/${
-                    item.category === "men's clothing"
-                      ? "men"
-                      : item.category === "women's clothing"
-                      ? "women"
-                      : item.category
-                  }/${item.id}`}
+                  to={`/first-store/${item.category}/${item.id}`}
                   key={item.id}
                   className="card m-3 p-3 d-flex justify-content-center align-items-stretch focus-ring active"
                   style={{ maxWidth: "540px", textDecoration: "none" }}
@@ -211,12 +201,12 @@ const ItemsList = ({ category = "", waiting, onChangeWaiting }) => {
                             <div className="text-body-secondary">
                               <b>
                                 {" "}
-                                Rate: {item.rating?.rate}{" "}
+                                Rate: {randomInt(1, 10)}{" "}
                                 <i className="bi bi-star-fill"></i>
                               </b>
                             </div>
                             <div className="text-body-secondary">
-                              <b>Count: {item.rating?.count} pcs</b>
+                              <b>Quantity: {randomInt(10, 999)} pcs</b>
                             </div>
                           </div>
                           <h4>

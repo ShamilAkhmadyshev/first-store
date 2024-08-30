@@ -7,10 +7,26 @@ const http = axios.create({
 });
 
 http.interceptors.request.use(
-  function (config) {
+  async function (config) {
     const containSlash = /\/$/gi.test(config.url);
     config.url =
       (containSlash ? config.url.slice(0, -1) : config.url) + ".json";
+    // if (refreshToken && expiresDate < Date.now()) {
+    //   const { data } = await httpAuth.post("token", {
+    //     grant_type: "refresh_token",
+    //     refresh_token: refreshToken,
+    //   });
+    //   localStorageService.setTokens({
+    //     refreshToken: data.refresh_token,
+    //     expiresDate: data.expires_in,
+    //     idToken: data.id_token,
+    //     localId: data.user_id,
+    //   });
+    // }
+    // const accessToken = localStorage.getItem("jwt-token");
+    // if (accessToken) {
+    //   config.params = { ...config.params, auth: accessToken };
+    // }
     return config;
   },
   function (error) {
@@ -20,7 +36,6 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (res) => {
-    console.log(res);
     return res;
   },
   function (error) {
@@ -40,6 +55,7 @@ const httpService = {
   put: http.put,
   delete: http.delete,
   post: http.post,
+  patch: http.patch,
 };
 
 export default httpService;

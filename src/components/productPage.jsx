@@ -1,17 +1,46 @@
-import { NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "./spinner";
 import Humanize from "humanize-plus";
-import bootstrap from "bootstrap";
+// import bootstrap from "bootstrap";
+// import userService from "../app/service/userService";
+import { useAuth } from "../app/hooks/useAuth";
 const ProductPage = () => {
   const [product, setProduct] = useState();
+  const [cartAdded, setCartAdded] = useState(false);
   const { id } = useParams();
+  const { user, updateUser } = useAuth();
+
+  useEffect(() => {
+    if (!cartAdded) {
+      user?.cart?.forEach((p) =>
+        Number(p?.id) === Number(id) ? setCartAdded(true) : null
+      );
+    }
+  }, [user]);
+
+  const handleAddProduct = async () => {
+    const data = user.cart
+      ? {
+          ...user,
+          cart: [...user.cart, { id: product.id, quantity: 1 }],
+        }
+      : {
+          ...user,
+          cart: [{ id: product.id, quantity: 1 }],
+        };
+    try {
+      await updateUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     axios
-      .get(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => setProduct(res.data));
+      .get(`https://fakestoreapi.in/api/products/${id}`)
+      .then((res) => setProduct(res.data.product));
   }, [id]);
 
   // useEffect(() => {
@@ -19,6 +48,9 @@ const ProductPage = () => {
   // }, [product]);
 
   // const category = product.category === "jewelery" ? "jewelry" :  product.category.includes(" ") ? `${product.category.splice}`
+  const randomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
 
   return (
     <>
@@ -32,15 +64,7 @@ const ProductPage = () => {
                 <NavLink to="/first-store">Home</NavLink>
               </li>
               <li className="breadcrumb-item">
-                <NavLink
-                  to={`/first-store/${
-                    product.category === "men's clothing"
-                      ? "men"
-                      : product.category === "women's clothing"
-                      ? "women"
-                      : product.category
-                  }`}
-                >
+                <NavLink to={`/first-store/${product.category}`}>
                   {Humanize.capitalize(product.category)}
                 </NavLink>
               </li>
@@ -49,7 +73,7 @@ const ProductPage = () => {
               </li>
             </ol>
           </nav>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center m-5">
             <div className="row g-0 ">
               <div className="col-md-4">
                 <img
@@ -61,7 +85,12 @@ const ProductPage = () => {
               </div>
               <div className="col-md-8">
                 <div className="card-body mt-5">
-                  <h2 className="card-title">{product.title}</h2>
+                  <h2
+                    style={{ maxWidth: "800px", textAlign: "justify" }}
+                    className="card-title"
+                  >
+                    {product.title}
+                  </h2>
                   <p
                     style={{ maxWidth: "800px", textAlign: "justify" }}
                     className="card-text fs-5 mt-4"
@@ -76,12 +105,12 @@ const ProductPage = () => {
                       <p className="card-text">
                         {" "}
                         <b>
-                          Rate: {product.rating?.rate}{" "}
+                          Rate: {randomInt(1, 10)}{" "}
                           <i className="bi bi-star-fill"></i>
                         </b>
                       </p>
                       <p className="text-body-secondary">
-                        <b>Count: {product.rating?.count} pcs</b>
+                        <b>Quantity: {randomInt(10, 999)} pcs</b>
                       </p>
                     </div>
 
@@ -91,9 +120,22 @@ const ProductPage = () => {
                           {product.price}$
                         </span>
                       </h3>
-                      <button type="button" className="btn btn-primary">
-                        Add to cart
-                      </button>
+                      {cartAdded ? (
+                        <Link
+                          className="btn btn-primary"
+                          to={"/first-store/cart"}
+                        >
+                          Go to cart
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={handleAddProduct}
+                          type="button"
+                          className="btn btn-primary"
+                        >
+                          Add to cart
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
