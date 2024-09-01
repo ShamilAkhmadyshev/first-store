@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "../pages/layout";
 import MainProductsPage from "../components/mainProductsPage";
 import ProductPage from "../components/productPage";
@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route
               path="/first-store"
@@ -127,7 +127,7 @@ function App() {
               />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </AuthProvider>
       <ToastContainer />
     </>
