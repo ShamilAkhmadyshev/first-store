@@ -36,7 +36,7 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/tv"
+                path="tv"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -47,7 +47,7 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/audio"
+                path="audio"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -69,7 +69,7 @@ function App() {
                 }
               /> */}
               <Route
-                path="/first-store/mobile"
+                path="mobile"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -80,7 +80,7 @@ function App() {
                 }
               />
               <Route
-                path="/first-store/gaming"
+                path="gaming"
                 element={
                   <MainProductsPage
                     waiting={waiting}
@@ -104,25 +104,25 @@ function App() {
               <Route
                 waiting={waiting}
                 onChangeWaiting={changeWaitingStatus}
-                path="/first-store/:category/:id"
+                path=":category/:id"
                 element={<ProductPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/first-store/login"
+                path="login"
                 element={<LoginPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/first-store/registration"
+                path="registration"
                 element={<RegistrationPage />}
               />
               <Route
                 // waiting={waiting}
                 // onChangeWaiting={changeWaitingStatus}
-                path="/first-store/cart"
+                path="cart"
                 element={<Cart />}
               />
             </Route>
