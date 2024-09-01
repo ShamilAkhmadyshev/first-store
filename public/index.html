@@ -5,6 +5,10 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; img-src *;"
     /> -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="img-src 'self' data: https://shamilakhmadyshev.github.io https://storage.googleapis.com https://cdn.jsdelivr.net;"
+    />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -13,16 +17,13 @@
       content="Web site created using create-react-app"
     />
     <!-- content="default-src 'self'; img-src 'self' data: https://shamilakhmadyshev.github.io https://cdn.jsdelivr.net;" -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="img-src 'self' data: https://shamilakhmadyshev.github.io https://storage.googleapis.com https://cdn.jsdelivr.net;"
-    />
+
     <!-- <meta
       http-equiv="Content-Security-Policy"
       content="img-src 'self' data: https://shamilakhmadyshev.github.io;"
     /> -->
 
-    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -38,12 +39,12 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="apple-touch-icon" href="logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
