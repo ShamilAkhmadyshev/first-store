@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             <Route
               path="/first-store"
@@ -57,17 +57,7 @@ function App() {
                   />
                 }
               />
-              {/* <Route
-                path="/first-store/laptop"
-                element={
-                  <MainProductsPage
-                    waiting={waiting}
-                    onChangeWaiting={changeWaitingStatus}
-                    name="Laptop"
-                    link="laptop"
-                  />
-                }
-              /> */}
+
               <Route
                 path="mobile"
                 element={
@@ -90,17 +80,6 @@ function App() {
                   />
                 }
               />
-              {/* <Route
-                path="/first-store/appliances"
-                element={
-                  <MainProductsPage
-                    waiting={waiting}
-                    onChangeWaiting={changeWaitingStatus}
-                    name="Appliances"
-                    link="appliances"
-                  />
-                }
-              /> */}
               <Route
                 waiting={waiting}
                 onChangeWaiting={changeWaitingStatus}
@@ -127,7 +106,7 @@ function App() {
               />
             </Route>
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </AuthProvider>
       <ToastContainer />
     </>
