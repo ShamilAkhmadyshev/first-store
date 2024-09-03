@@ -83,7 +83,7 @@ function App() {
               <Route
                 waiting={waiting}
                 onChangeWaiting={changeWaitingStatus}
-                path=":category/:id"
+                path=":id"
                 element={<ProductPage />}
               />
               <Route

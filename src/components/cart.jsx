@@ -74,10 +74,14 @@ const Cart = () => {
       {products?.length > 0 ? (
         <div className="container-fluid me-2">
           <h1>Shopping cart</h1>
-          <div className="d-flex flex-column flex-sm-row gap-2">
-            <div>
+          <div className="d-flex flex-column flex-sm-row gap-2 ">
+            <div className="flex-grow-1">
               {products.map((item) => (
-                <div key={item.id} className="card   mb-3 shadow-sm">
+                <div
+                  key={item.id}
+                  className="card mb-3 shadow-sm "
+                  // style={{ minWidth: "75vw" }}
+                >
                   <div className="row g-0 d-flex justify-content-md-start align-items-md-start justify-content-center align-items-center ">
                     <div className="col-md-4 d-flex justify-content-center align-items-center ">
                       <img
@@ -143,7 +147,7 @@ const Cart = () => {
               style={{ minWidth: "175px" }}
               className="card align-self-stretch align-self-sm-start bg-body-secondary shadow-sm sticky-top"
             >
-              <div className="card-body ">
+              <div className="card-body  align-self-center">
                 <h5 className="card-title">Order summary</h5>
                 <div
                   style={{ maxWidth: "130px" }}
