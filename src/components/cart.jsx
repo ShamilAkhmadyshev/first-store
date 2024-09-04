@@ -70,9 +70,9 @@ const Cart = () => {
   // }, [products]);
 
   return (
-    <>
+    <div className="d-flex justify-content-center">
       {products?.length > 0 ? (
-        <div className="container-fluid me-2">
+        <div className=" me-2" style={{ maxWidth: "1000px" }}>
           <h1>Shopping cart</h1>
           <div className="d-flex flex-column flex-sm-row gap-2 ">
             <div className="flex-grow-1">
@@ -93,7 +93,7 @@ const Cart = () => {
                     </div>
                     <div className="col-md-8">
                       <div className="card-body ">
-                        <Link to={`/first-store/${item.category}/${item.id}`}>
+                        <Link to={`/first-store/${item.id}`}>
                           <h5
                             className="card-title  "
                             style={{ marginBottom: "10px" }}
@@ -153,7 +153,7 @@ const Cart = () => {
                   style={{ maxWidth: "130px" }}
                   className="mb-1 card-text d-flex align-items-center justify-content-between"
                 >
-                  <span>Price:</span>
+                  <span>Totally:</span>
                   <span className="text-success">
                     {products.reduce((a, n) => (a += n.price * n.quantity), 0)}$
                   </span>
@@ -177,7 +177,7 @@ const Cart = () => {
           Cart is empty
         </h3>
       )}
-    </>
+    </div>
   );
 };
 

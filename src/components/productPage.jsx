@@ -85,15 +85,15 @@ const ProductPage = () => {
               </div>
               <div className="col-md-8">
                 <div className="card-body mt-5">
-                  <h2
+                  <h4
                     style={{ maxWidth: "800px", textAlign: "justify" }}
                     className="card-title"
                   >
                     {product.title}
-                  </h2>
+                  </h4>
                   <p
                     style={{ maxWidth: "800px", textAlign: "justify" }}
-                    className="card-text fs-5 mt-4"
+                    className="card-text fs-7 mt-4"
                   >
                     {product.description}
                   </p>
