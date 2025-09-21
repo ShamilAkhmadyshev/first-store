@@ -9,8 +9,8 @@ const Cart = () => {
   useEffect(() => {
     if (user && user.cart) {
       const ids = user.cart.map((p) => p.id);
-      axios.get(`https://fakestoreapi.in/api/products`).then((res) => {
-        const filteredProducts = res.data.products.filter((p) =>
+      axios.get(`https://fakestoreapi.com/products`).then((res) => {
+        const filteredProducts = res.data.filter((p) =>
           ids.includes(p.id)
         );
         const sortedCart = user.cart.sort((a, b) => a.id - b.id);

@@ -36,47 +36,47 @@ function App() {
                 }
               />
               <Route
-                path="tv"
+                path="men's clothing"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="TV"
-                    link="tv"
+                    name="Men's clothing"
+                    link="men's clothing"
                   />
                 }
               />
               <Route
-                path="audio"
+                path="women's clothing"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="Audio"
-                    link="audio"
+                    name="Women's clothing"
+                    link="women's clothing"
                   />
                 }
               />
 
               <Route
-                path="mobile"
+                path="jewelery"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="Mobile"
-                    link="mobile"
+                    name="Jewelry"
+                    link="jewelery"
                   />
                 }
               />
               <Route
-                path="gaming"
+                path="electronics"
                 element={
                   <MainProductsPage
                     waiting={waiting}
                     onChangeWaiting={changeWaitingStatus}
-                    name="Gaming"
-                    link="gaming"
+                    name="Electronics"
+                    link="electronics"
                   />
                 }
               />

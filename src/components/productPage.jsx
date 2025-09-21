@@ -39,8 +39,8 @@ const ProductPage = () => {
 
   useEffect(() => {
     axios
-      .get(`https://fakestoreapi.in/api/products/${id}`)
-      .then((res) => setProduct(res.data.product));
+      .get(`https://fakestoreapi.com/products/${id}`)
+      .then((res) => setProduct(res.data));
   }, [id]);
 
   // useEffect(() => {

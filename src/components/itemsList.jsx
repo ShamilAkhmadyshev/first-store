@@ -68,17 +68,18 @@ const ItemsList = ({ category, waiting, onChangeWaiting }) => {
 
   useEffect(() => {
     axios
-      .get(`https://fakestoreapi.in/api/products`)
+      .get(`https://fakestoreapi.com/products`)
       .then((response) => {
         if (category) {
-          const filtered = response.data.products.filter(
+          console.log(category, response.data)
+          const filtered = response.data.filter(
             (p) => p.category === category
           );
           setItems(filtered);
           setFilteredItems(filtered);
         } else {
-          setFilteredItems(response.data.products);
-          setItems(response.data.products);
+          setFilteredItems(response.data);
+          setItems(response.data);
         }
       })
       .then(() => {

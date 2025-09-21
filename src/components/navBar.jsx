@@ -71,37 +71,37 @@ const NavBar = ({ onChangeWaiting }) => {
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/first-store/tv"
+                to="/first-store/men's%20clothing"
               >
-                TV
+                Men's clothing
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
                 onClick={setWaitingTrue}
                 className="nav-link"
-                to="/first-store/audio"
+                to="/first-store/women's%20clothing"
               >
-                Audio
+                Women's clothing
               </NavLink>
             </li>
 
             <li className="nav-item">
               <NavLink
                 onClick={setWaitingTrue}
-                to="/first-store/mobile"
+                to="/first-store/jewelery"
                 className="nav-link"
               >
-                Mobile
+                Jewelry
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
                 onClick={setWaitingTrue}
-                to="/first-store/gaming"
+                to="/first-store/electronics"
                 className="nav-link"
               >
-                Gaming
+                Electronics
               </NavLink>
             </li>
           </ul>
